@@ -81,7 +81,7 @@ hparams = tf.contrib.training.HParams(
     # currently limited for speaker embedding
     # this should only be enabled for multi-speaker dataset
     gin_channels=-1,  # i.e., speaker embedding dim
-    n_speakers=34,  # 7 for CMU ARCTIC
+    n_speakers=35,  # 7 for CMU ARCTIC
 
     # Data loader
     pin_memory=True,

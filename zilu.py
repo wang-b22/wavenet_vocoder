@@ -16,7 +16,7 @@ def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
     executor = ProcessPoolExecutor(max_workers=num_workers)
     futures = []
     index = 1
-    with open(os.path.join(in_dir, 'filelists/zilu.txt'), encoding='utf-8') as f:
+    with open(os.path.join(in_dir, 'vs/wavenet_vocoder/filelists/all_wav.txt'), encoding='utf-8') as f:
         for line in f:
             parts = line.strip().split('|')
             wav_path = os.path.join(in_dir, parts[0])
@@ -30,8 +30,9 @@ def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
 
 def _process_utterance(out_dir, index, wav_path, text, speaker_id):
     # Load the audio to a numpy array:
+    print('start',wav_path)
     wav = audio.load_wav(wav_path)
-
+    print(wav_path)
     if hparams.rescaling:
         wav = wav / np.abs(wav).max() * hparams.rescaling_max
 
@@ -84,6 +85,6 @@ def _process_utterance(out_dir, index, wav_path, text, speaker_id):
             out.astype(out_dtype), allow_pickle=False)
     np.save(os.path.join(out_dir, mel_filename),
             mel_spectrogram.astype(np.float32), allow_pickle=False)
-
+    print(os.path.join(out_dir, audio_filename))
     # Return a tuple describing this training example:
     return (audio_filename, mel_filename, timesteps, text, speaker_id)
