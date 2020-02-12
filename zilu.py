@@ -30,9 +30,12 @@ def build_from_path(in_dir, out_dir, num_workers=1, tqdm=lambda x: x):
 
 def _process_utterance(out_dir, index, wav_path, text, speaker_id):
     # Load the audio to a numpy array:
-    print('start',wav_path)
+
     wav = audio.load_wav(wav_path)
     print(wav_path)
+    file_name = os.path.basename(wav_path)
+
+
     if hparams.rescaling:
         wav = wav / np.abs(wav).max() * hparams.rescaling_max
 
@@ -79,8 +82,8 @@ def _process_utterance(out_dir, index, wav_path, text, speaker_id):
     timesteps = len(out)
 
     # Write the spectrograms to disk:
-    audio_filename = 'ljspeech-audio-%05d.npy' % index
-    mel_filename = 'ljspeech-mel-%05d.npy' % index
+    audio_filename = 'audio-' + file_name.replace('.wav','.npy')
+    mel_filename = 'mel-' + file_name.replace('.wav','.npy')
     np.save(os.path.join(out_dir, audio_filename),
             out.astype(out_dtype), allow_pickle=False)
     np.save(os.path.join(out_dir, mel_filename),
