@@ -1,0 +1,1 @@
+python preprocess.py zilu /data/wangbiao /data/wangbiao/data/VCdata/zilu/zilu_wavnet
