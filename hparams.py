@@ -96,7 +96,7 @@ hparams = tf.contrib.training.HParams(
     # Loss
 
     # Training:
-    batch_size=2,
+    batch_size=8,
     adam_beta1=0.9,
     adam_beta2=0.999,
     adam_eps=1e-8,

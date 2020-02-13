@@ -21,7 +21,7 @@ def wavenet(out_channels=256,
             use_speaker_embedding=True,
             legacy=True,
             ):
-    from wavenet_vocoder import WaveNet
+    from wavenet_vocoder.wavenet import WaveNet
 
     model = WaveNet(out_channels=out_channels, layers=layers, stacks=stacks,
                     residual_channels=residual_channels,
